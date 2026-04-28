@@ -175,15 +175,55 @@ La API queda disponible en: `http://localhost:8080`
 
 ---
 
-## 📁 Estructura del Proyecto
+## 🗂️ Arquitectura del Proyecto
 
-*(Se irá completando conforme avance el desarrollo)*
+El proyecto sigue una arquitectura en capas estricta:
+
+```
+com.veterinaria.clinica
+├── controller/        → Exposición de endpoints REST
+├── service/           → Interfaces de lógica de negocio
+│   └── impl/          → Implementaciones de los servicios
+├── repository/        → Acceso a base de datos (JPA)
+├── models/            → Entidades JPA (tablas)
+└── dto/               → Objetos de transferencia de datos
+```
+
+### Flujo de una petición
+
+```
+Cliente (Postman)
+      ↓
+  Controller        (@RestController)
+      ↓
+   Service          (interface + impl)
+      ↓
+  Repository        (JpaRepository)
+      ↓
+  Base de datos     (PostgreSQL)
+```
+
+---
+
+## 📁 Estructura de Archivos
 
 ```
 src/
 └── main/
     ├── java/com/veterinaria/clinica/
-    │   └── ClinicaApplication.java
+    │   ├── ClinicaApplication.java
+    │   ├── controller/
+    │   │   └── EspecieController.java       ✅
+    │   ├── service/
+    │   │   ├── EspecieService.java          ✅
+    │   │   └── impl/
+    │   │       └── EspecieServiceImpl.java  ✅
+    │   ├── repository/
+    │   │   └── EspecieRepository.java       ✅
+    │   ├── models/
+    │   │   └── Especie.java                 ✅
+    │   └── dto/
+    │       └── EspecieDto.java              ✅
     └── resources/
         └── application.properties
 ```
@@ -192,12 +232,106 @@ src/
 
 ## 👥 Integrantes del Equipo
 
-| Nombre            | Carné        |
-|-------------------|--------------|
-| [Kenneth Rojas Jimenez] | [2021466579] |
-| [Nombre 2]        | [Carné]      |
-| [Nombre 3]        | [Carné]      |
-| [Nombre 4]        | [Carné]      |
+| Nombre | Carné |
+|---|---|
+| [Nombre 1] | [Carné] |
+| [Nombre 2] | [Carné] |
+| [Nombre 3] | [Carné] |
+| [Nombre 4] | [Carné] |
+
+---
+
+## 📌 Endpoints REST
+
+### Especie `/api/v1/especies` ✅
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/api/v1/especies` | Listar todas las especies |
+| GET | `/api/v1/especies/{id}` | Obtener especie por ID |
+| POST | `/api/v1/especies` | Crear nueva especie |
+| PUT | `/api/v1/especies/{id}` | Actualizar especie |
+| DELETE | `/api/v1/especies/{id}` | Eliminar especie |
+
+---
+
+## 🔲 Pendiente de Implementar
+
+### Estructura de paquetes
+- [x] `models`
+- [x] `dto`
+- [x] `repository`
+- [x] `service`
+- [x] `service/impl`
+- [x] `controller`
+
+---
+
+### Módulo Especie ✅
+- [x] `Especie.java` (entity)
+- [x] `EspecieDto.java`
+- [x] `EspecieRepository.java`
+- [x] `EspecieService.java`
+- [x] `EspecieServiceImpl.java`
+- [x] `EspecieController.java`
+
+---
+
+### Módulo Medicamento
+- [ ] `Medicamento.java`
+- [ ] `MedicamentoDto.java`
+- [ ] `MedicamentoRepository.java`
+- [ ] `MedicamentoService.java`
+- [ ] `MedicamentoServiceImpl.java`
+- [ ] `MedicamentoController.java`
+
+### Módulo Veterinario
+- [ ] `Veterinario.java`
+- [ ] `VeterinarioDto.java`
+- [ ] `VeterinarioRepository.java`
+- [ ] `VeterinarioService.java`
+- [ ] `VeterinarioServiceImpl.java`
+- [ ] `VeterinarioController.java`
+
+### Módulo Propietario
+- [ ] `Propietario.java`
+- [ ] `PropietarioDto.java`
+- [ ] `PropietarioRepository.java`
+- [ ] `PropietarioService.java`
+- [ ] `PropietarioServiceImpl.java`
+- [ ] `PropietarioController.java`
+
+### Módulo Raza
+- [ ] `Raza.java` (ManyToOne → Especie)
+- [ ] `RazaDto.java`
+- [ ] `RazaRepository.java`
+- [ ] `RazaService.java`
+- [ ] `RazaServiceImpl.java`
+- [ ] `RazaController.java`
+
+### Módulo Mascota
+- [ ] `Mascota.java` (ManyToOne → Raza, Propietario)
+- [ ] `MascotaDto.java`
+- [ ] `MascotaRepository.java`
+- [ ] `MascotaService.java`
+- [ ] `MascotaServiceImpl.java`
+- [ ] `MascotaController.java`
+
+### Módulo Consulta
+- [ ] `Consulta.java` (ManyToOne → Mascota, Veterinario)
+- [ ] `ConsultaDto.java`
+- [ ] `ConsultaRepository.java`
+- [ ] `ConsultaService.java`
+- [ ] `ConsultaServiceImpl.java`
+- [ ] `ConsultaController.java`
+
+### Módulo ConsultaMedicamento
+- [ ] `ConsultaMedicamentoId.java` (EmbeddedId)
+- [ ] `ConsultaMedicamento.java` (tabla intermedia)
+- [ ] `ConsultaMedicamentoDto.java`
+- [ ] `ConsultaMedicamentoRepository.java`
+- [ ] `ConsultaMedicamentoService.java`
+- [ ] `ConsultaMedicamentoServiceImpl.java`
+- [ ] `ConsultaMedicamentoController.java`
 
 ---
 
