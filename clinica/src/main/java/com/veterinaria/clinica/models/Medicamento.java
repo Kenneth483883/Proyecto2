@@ -1,14 +1,10 @@
 package com.veterinaria.clinica.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,8 +17,6 @@ public class Medicamento {
     private Long id;
 
     private String nombre;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "medicamentos", fetch = FetchType.LAZY)
-    private Set<Consulta> consultas = new HashSet<>();
+    private String descripcion;
+    private String unidadDosis;
 }

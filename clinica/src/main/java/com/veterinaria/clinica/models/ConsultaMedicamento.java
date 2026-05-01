@@ -5,7 +5,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,5 +25,6 @@ public class ConsultaMedicamento {
     @JoinColumn(name = "medicamento_id")
     private Medicamento medicamento;
 
+    private String dosis;
     private int duracionDias;
 }

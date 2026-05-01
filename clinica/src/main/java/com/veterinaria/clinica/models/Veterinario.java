@@ -5,7 +5,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,7 +16,8 @@ public class Veterinario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombreCompleto;
+    private String nombre;
+    private String primerApellido;
     private String especialidad;
     private String telefono;
 }

@@ -5,7 +5,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -18,4 +17,5 @@ public class Especie {
     private Long id;
 
     private String nombre;
+    private String descripcion;
 }

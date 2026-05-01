@@ -1,12 +1,11 @@
 package com.veterinaria.clinica.dto;
-
-import com.veterinaria.clinica.models.Consulta;
-import com.veterinaria.clinica.models.Medicamento;
 import lombok.*;
 
-@Getter @Setter @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class ConsultaMedicamentoDto {
-    private Consulta consulta;
-    private Medicamento medicamento;
+    private Long consultaId;
+    private Long medicamentoId;
+    private String medicamentoNombre;
+    private String dosis;
     private int duracionDias;
 }

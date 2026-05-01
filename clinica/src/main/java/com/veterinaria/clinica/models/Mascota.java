@@ -1,15 +1,11 @@
 package com.veterinaria.clinica.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,8 +28,4 @@ public class Mascota {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "raza_id", nullable = false)
     private Raza raza;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Consulta> consultas = new HashSet<>();
 }

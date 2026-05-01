@@ -5,7 +5,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,7 +16,9 @@ public class Propietario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombreCompleto;
+    private String nombre;
+    private String primerApellido;
+    private String segundoApellido;
     private String telefono;
     private String email;
 }
