@@ -43,12 +43,19 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Rutas públicas
                         .requestMatchers("/auth/**").permitAll()
-                        // Solo ADMIN puede eliminar y actualizar
-                        .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ROLE_ADMIN")
-                        // Cualquier usuario autenticado puede ver
-                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+
+                        // Solo ADMIN puede gestionar veterinarios y medicamentos
+                        .requestMatchers("/api/v1/veterinarios/**").hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers("/api/v1/medicamentos/**").hasAnyAuthority("ROLE_ADMIN")
+
+                        // ADMIN y VETERINARIO pueden crear y editar
+                        .requestMatchers(HttpMethod.POST, "/api/v1/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VETERINARIO")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VETERINARIO")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/**").hasAnyAuthority("ROLE_ADMIN")
+
+                        // Todos los autenticados pueden ver
+                        .requestMatchers(HttpMethod.GET, "/api/v1/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_VETERINARIO", "ROLE_USER")
+
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
